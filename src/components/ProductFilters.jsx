@@ -16,7 +16,7 @@ function ProductFilters({onSearch}) {
                     placeholder="Buscar Producto" 
                     value={search}
                     onChange={handleSearch}
-                    className="border rounded-lg px-4 py-3 w-full md:w-80 focus:ring-2 focus:ring-blue-500"
+                    className="border border-gray-500 rounded-lg px-4 py-3 w-full mb-4 md:w-80 "
             />
         
     )

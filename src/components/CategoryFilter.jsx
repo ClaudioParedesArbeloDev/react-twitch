@@ -23,13 +23,12 @@ function CategoryFilter({onCategoryChange}) {
         onCategoryChange(value);
     }
 
-    console.log(categories)
 
     return (
         <select 
             value={selected}
             onChange={handleChange}
-            className="w-full md:w-64 border border-gray300 rounded-lg px-5 py-3 my-4"
+            className="w-full md:w-64 border border-gray-600 rounded-lg px-5 py-3 mb-4"
             >
                 <option value="">Todas las categorias</option>
                 {categories.map((cat) => (

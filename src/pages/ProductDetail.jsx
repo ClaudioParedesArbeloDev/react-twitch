@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import QuantityCounter from "../components/QuantityCounter";
+import { useCart } from "../context/CartContext";
 
 
 function ProductDetail() {
 
     const { id } = useParams();
+
     const [product, setProduct] = useState({});
     const [quantity, setQuantity] = useState(1);
+
+    const { addToCart } = useCart();
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -19,8 +23,12 @@ function ProductDetail() {
     }, [id]);
 
     const handleAddToCart = () => {
-        console.log("Agregar al Carrito");
-    }
+        addToCart(product, quantity);
+        alert(`¡${quantity} "${product.title}" agregado al carrito!`);
+        setQuantity(1);
+    };
+
+    if (!product.title) return <div className="text-center py-20">Cargando...</div>;
     
     return(
         <div className="flex flex-col items-center justify-between md:grid md:grid-cols-2 md:justify-center gap-6 p-4 md:p-8">
