@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 
+import API from "../api/api";
 import CategoryFilter from "../components/CategoryFilter";
 import Card from "../components/Card";
 import ProductFilters from "../components/ProductFilters";
@@ -15,13 +16,15 @@ function Home() {
 
     useEffect(() => {
         const fetchProducts = async () => {
-            const response = await fetch('https://fakestoreapi.com/products');
+            const response = await fetch('https://api.escuelajs.co/api/v1/products');
             const data = await response.json();
             setProducts(data);
             setFiltered(data);
         };
         fetchProducts();
     }, []);
+
+    console.log(products)
 
    useEffect(() => {
         let result = [...products];
