@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import QuantityCounter from "../components/QuantityCounter";
 import { useCart } from "../context/CartContext";
-import API from "../api/api";
+import API from "../api/api"; //Llamo directamente a la importacion del archivo API
 
 
 function ProductDetail() {
@@ -16,7 +16,7 @@ function ProductDetail() {
 
     useEffect(() => {
         const fetchProduct = async () => {
-            const response = await fetch(`${API}/${id}`);
+            const response = await fetch(`${API}/${id}`); //Llamo directamente a la importacion del archivo API
             const data = await response.json();
             setProduct(data);
         };
@@ -24,7 +24,7 @@ function ProductDetail() {
     }, [id]);
     
 
-    console.log(product)
+   
     const handleAddToCart = () => {
         addToCart(product, quantity);
         alert(`¡${quantity} "${product.title}" agregado al carrito!`);
