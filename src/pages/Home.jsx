@@ -16,7 +16,7 @@ function Home() {
 
     useEffect(() => {
         const fetchProducts = async () => {
-            const response = await fetch('https://api.escuelajs.co/api/v1/products');
+            const response = await fetch(API);
             const data = await response.json();
             setProducts(data);
             setFiltered(data);
@@ -36,7 +36,7 @@ function Home() {
         }
 
         if (selectedCategory){
-            result = result.filter((p) => p.category === selectedCategory);
+            result = result.filter((p) => p.category.name === selectedCategory);
         }
 
         if(sortOption) {

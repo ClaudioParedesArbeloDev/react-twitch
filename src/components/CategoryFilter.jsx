@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import API from "../api/api";
 
 function CategoryFilter({onCategoryChange}) {
 
@@ -8,10 +9,10 @@ function CategoryFilter({onCategoryChange}) {
 
     
     useEffect(()=>{
-        fetch("https://fakestoreapi.com/products")
+        fetch(API)
         .then(res => res.json())
         .then(data => {
-            const uniqueCategories = [...new Set(data.map(p => p.category))];
+            const uniqueCategories = [...new Set(data.map(p => p.category.name))];
             setCategories(uniqueCategories);
         })
         

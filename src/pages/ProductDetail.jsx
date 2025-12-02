@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import QuantityCounter from "../components/QuantityCounter";
 import { useCart } from "../context/CartContext";
+import API from "../api/api";
 
 
 function ProductDetail() {
@@ -15,13 +16,15 @@ function ProductDetail() {
 
     useEffect(() => {
         const fetchProduct = async () => {
-            const response = await fetch(`https://fakestoreapi.com/products/${id}`);
+            const response = await fetch(`${API}/${id}`);
             const data = await response.json();
             setProduct(data);
         };
         fetchProduct();
     }, [id]);
+    
 
+    console.log(product)
     const handleAddToCart = () => {
         addToCart(product, quantity);
         alert(`¡${quantity} "${product.title}" agregado al carrito!`);
@@ -40,7 +43,7 @@ function ProductDetail() {
 
   
         <img 
-            src={product.image} 
+            src={product.images} 
             alt={product.title}
             className="w-2/3 md:w-full md:max-w-md object-contain"
         />
