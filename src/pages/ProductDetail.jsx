@@ -1,17 +1,25 @@
+//importando las librerias necesarias
 import { useState, useEffect } from "react";
+//useParams sirve para obtener los parametros de la ruta url
 import { useParams } from "react-router-dom";
-import QuantityCounter from "../components/QuantityCounter";
+
+//importar el contexto de carrito
 import { useCart } from "../context/CartContext";
+
+//importar los componentes
+import QuantityCounter from "../components/QuantityCounter";
 import API from "../api/api"; //Llamo directamente a la importacion del archivo API
 
 
 function ProductDetail() {
 
+    /* aca obtenemos el parametro del id a traves de la url */
     const { id } = useParams();
 
     const [product, setProduct] = useState({});
     const [quantity, setQuantity] = useState(1);
 
+    //hook use cart
     const { addToCart } = useCart();
 
     useEffect(() => {
@@ -21,16 +29,17 @@ function ProductDetail() {
             setProduct(data);
         };
         fetchProduct();
-    }, [id]);
+    }, [id]); /* esto vuelve a cargar cada vez que se le pasa un id */
     
 
-   
+   /* esta funcion se utiliza para agregar el producto al carrito y necesita que le pasemos el producto y la cantidad */
     const handleAddToCart = () => {
         addToCart(product, quantity);
         alert(`¡${quantity} "${product.title}" agregado al carrito!`);
         setQuantity(1);
     };
 
+    //si el producto no existe, mostramos un mensaje de cargando
     if (!product.title) return <div className="text-center py-20">Cargando...</div>;
     
     return(
@@ -58,8 +67,11 @@ function ProductDetail() {
             ${product.price}
             </p>
             <div>
+                {/* esto es el contador que es un componente */}
                 <QuantityCounter initial={quantity} onChange={setQuantity} />
                 <button 
+                    /* todo lo que tenga el subfijo on esta esperando un evento, en este caso click y este evento */
+                    /* se ejecutara cuando se haga click en el boton */
                     onClick={handleAddToCart}
                     className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-4 px-8 rounded-lg transition w-[250px] md:w-auto">
                     Agregar al Carrito
